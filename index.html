@@ -6,25 +6,31 @@
     <title>Adivinator</title>
     <link rel="stylesheet" href="./styles.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Adivinator</h1>
         <img src="./img/logo.png" alt="logo" class="logo">
         <p>Escribe tu petición y luego realiza tu pregunta. ¡La respuesta será revelada!</p>
         <input type="text" id="input-petition" 
-       placeholder="Escribe tu petición a Adivinator"
-       autocorrect="off" 
-       autocomplete="off" 
-       autocapitalize="off">
+               placeholder="Escribe tu petición a Adivinator"
+               autocorrect="off" 
+               autocomplete="off" 
+               autocapitalize="off">
         <input type="text" id="input-question" placeholder="Escribe tu pregunta">
         <button id="start-btn">Responder</button>
-        <div id="response" style="display: none;"> <!-- Oculto inicialmente -->
+        <div id="response"> <!-- Este contenedor debe existir -->
             <strong>Respuesta:</strong> <span id="response-text"></span>
         </div>
-        <div id="loading-container" style="display: none;"> <!-- Animación de carga -->
-            <div class="loading-spinner"></div>
-        </div>
     </div>
+    <div id="loading-container" style="display: none;"> <!-- Animación de carga -->
+        <div class="loading-spinner"></div>
+    </div>
+    <footer class="footer">
+        by Marcelo Salinas V.
+    </footer>
+    
+
     <script src="./main.js"></script>
 </body>
 </html>

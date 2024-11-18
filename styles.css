@@ -5,70 +5,106 @@
     box-sizing: border-box;
 }
 
-/* Estilo para el logo */
-.logo {
-    display: block; /* Asegura que se comporte como un bloque */
-    margin: 20px auto; /* Centra la imagen horizontalmente y agrega margen superior/inferior */
-    max-width: 150px; /* Limita el ancho máximo para dispositivos grandes */
-    width: 100%; /* Escala la imagen para pantallas más pequeñas */
-    height: auto; /* Mantiene la proporción de la imagen */
-    border-radius: 50%; /* Opcional: aplica un borde redondeado si es necesario */
-}
-
-
+/* Estilo general */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
-    color: #333;
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #3a0ca3, #7209b7, #f72585); /* Fondo degradado más armónico */
+    background-attachment: fixed;
+    background-size: cover;
+    color: #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    margin: 0;
 }
 
+
+
+/* Contenedor principal */
 .container {
     text-align: center;
-    padding: 20px;
-    background: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 25px 20px;
+    background: rgba(255, 255, 255, 0.85); /* Fondo claro con transparencia */
+    border-radius: 16px;
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Sombra sutil */
     width: 90%;
     max-width: 400px;
+    backdrop-filter: blur(8px);
 }
 
+/* Título */
 h1 {
-    font-size: 24px;
-    margin-bottom: 20px;
-    color: #6200ea;
+    font-size: 28px; /* Tamaño del título ajustado */
+    margin-bottom: 15px;
+    color: #3a0ca3; /* Color principal del título */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2); /* Sombra ligera */
 }
 
+/* Logo */
+.logo {
+    display: block;
+    margin: 10px auto 20px;
+    max-width: 120px;
+    width: 100%;
+    height: auto;
+    border-radius: 50%; /* Mantén el estilo redondeado */
+    border: 2px solid #fff; /* Borde decorativo */
+}
+
+/* Texto de instrucción */
+p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #555; /* Color neutro para contraste */
+}
+
+/* Campos de entrada */
 input[type="text"] {
     width: 100%;
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
     font-size: 16px;
+    background-color: rgba(255, 255, 255, 0.95); /* Fondo casi sólido */
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
+input[type="text"]:focus {
+    border-color: #7209b7;
+    box-shadow: 0 0 8px rgba(114, 9, 183, 0.4); /* Brillo en foco */
+}
+
+/* Botón de enviar */
 button {
-    padding: 10px 20px;
-    background-color: #6200ea;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    padding: 12px 20px;
+    background: linear-gradient(135deg, #7209b7, #f72585);
+    color: #fff;
+    font-weight: bold;
     font-size: 16px;
+    border: none;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s, box-shadow 0.3s;
 }
 
 button:hover {
-    background-color: #3700b3;
+    transform: scale(1.05); /* Efecto de aumento */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+    transform: scale(0.95); /* Efecto de clic */
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.2);
 }
 
 /* Contenedor del loading */
 #loading-container {
-    display: none; /* Oculto por defecto */
+    display: none;
     justify-content: center;
     align-items: center;
     position: fixed;
@@ -76,17 +112,17 @@ button:hover {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(0, 0, 0, 0.5); /* Fondo semi-transparente */
-    z-index: 1000; /* Asegura que esté encima */
+    background: rgba(0, 0, 0, 0.6); /* Fondo semi-transparente oscuro */
+    z-index: 1000;
 }
 
 .loading-spinner {
     width: 50px;
     height: 50px;
-    border: 5px solid #f3f3f3; /* Borde exterior */
-    border-top: 5px solid #6200ea; /* Color del borde superior */
+    border: 5px solid rgba(255, 255, 255, 0.3);
+    border-top: 5px solid #f72585;
     border-radius: 50%;
-    animation: spin 1s linear infinite;
+    animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
@@ -98,8 +134,45 @@ button:hover {
     }
 }
 
-/* Estilo de la respuesta */
+/* Contenedor de la respuesta */
 #response {
-    margin-top: 20px;
-    text-align: left;
+    display: none; /* Oculto inicialmente, no ocupa espacio */
+    margin-top: 30px; /* Espaciado al mostrarse */
+    padding: 15px 20px; /* Espaciado interno */
+    background: rgba(114, 9, 183, 0.1); /* Fondo translúcido */
+    border-left: 4px solid #7209b7; /* Línea decorativa */
+    border-radius: 8px; /* Bordes redondeados */
+    font-size: 16px;
+    color: #3a0ca3;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0; /* Transparente inicialmente */
+    transform: translateY(10px); /* Animación hacia arriba */
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Suave animación */
+}
+
+#response.show {
+    display: block; /* Se hace visible */
+    opacity: 1; /* Totalmente opaco */
+    transform: translateY(0); /* Posición final */
+}
+
+#response strong {
+    color: #3a0ca3;
+    font-size: 18px;
+}
+
+.footer {
+    margin-top: 20px; /* Espaciado superior */
+    text-align: center; /* Centra el texto */
+    font-size: 14px; /* Tamaño pequeño */
+    color: rgba(255, 255, 255, 0.7); /* Color blanco translúcido */
+    font-weight: lighter; /* Texto más delgado */
+    background: rgba(0, 0, 0, 0.3); /* Fondo translúcido */
+    padding: 10px 0; /* Espaciado interno */
+    border-top: 1px solid rgba(255, 255, 255, 0.2); /* Línea decorativa arriba */
+    position: fixed; /* Fijado al final de la pantalla */
+    bottom: 0;
+    width: 100%; /* Ocupa todo el ancho */
+    z-index: 1000; /* Asegura que esté encima de otros elementos */
 }

@@ -53,22 +53,27 @@ petition.addEventListener("input", () => {
 
 // Manejar el botón de respuesta
 boton.addEventListener("click", () => {
-    // Mostrar el contenedor de loading
+    // Mostrar el loading
     loadingContainer.style.display = "flex";
-    responseContainer.style.display = "none";
+    responseContainer.classList.remove("show"); // Asegura que la respuesta esté oculta
 
     setTimeout(() => {
-        loadingContainer.style.display = "none"; // Oculta el loading
-        responseContainer.style.display = "block"; // Muestra la respuesta
+        // Ocultar el loading y mostrar la respuesta
+        loadingContainer.style.display = "none";
+        responseContainer.classList.add("show"); // Muestra la respuesta con animación
+
+        // Mostrar la respuesta adecuada
         if (capturingHiddenAnswer && answer.length > 0) {
-            respuesta.textContent = answer; // Muestra la respuesta capturada
+            respuesta.textContent = answer;
         } else {
-            respuesta.textContent = defaultAnswer; // Muestra la respuesta por defecto
+            respuesta.textContent = defaultAnswer;
         }
-        petition.value = ""; // Resetea el campo de petición
-        question.value = ""; // Resetea el campo de pregunta
-        answer = ""; // Limpia la respuesta oculta
-        capturingHiddenAnswer = false; // Reinicia el estado
-        previousValue = ""; // Limpia el valor anterior
-    }, 2000); // 2000 ms = 2 segundos
+
+        // Reiniciar campos y variables
+        petition.value = "";
+        question.value = "";
+        answer = "";
+        capturingHiddenAnswer = false;
+        previousValue = "";
+    }, 2000); // Espera de 2 segundos para el loading
 });
