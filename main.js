@@ -10,21 +10,9 @@ let fakeIndex = 0; // Índice del texto falso
 let answer = ""; // Respuesta oculta
 let capturingHiddenAnswer = false; // Estado de captura
 let visibleText = ""; // Parte visible del texto antes del punto
+let previousValue = ""; // Almacena el valor anterior del campo
 
-// Detectar teclas específicas (como Backspace)
-petition.addEventListener("keydown", (event) => {
-    if (capturingHiddenAnswer && event.key === "Backspace") {
-        // Retroceder en la respuesta oculta y el texto falso
-        if (answer.length > 0) {
-            answer = answer.slice(0, -1);
-            if (fakeIndex > 0) fakeIndex--;
-        }
-        petition.value = visibleText + fakeText.slice(0, fakeIndex);
-        event.preventDefault(); // Evita la acción predeterminada
-    }
-});
-
-// Manejar entrada de texto (soporte para móviles y PC)
+// Manejar entrada de texto (compatible con móviles y PC)
 petition.addEventListener("input", () => {
     const currentValue = petition.value;
 
@@ -33,22 +21,31 @@ petition.addEventListener("input", () => {
         capturingHiddenAnswer = true;
         fakeIndex = 0; // Reinicia el índice del texto falso
         visibleText = currentValue.split(".")[0]; // Guarda el texto antes del punto
+        previousValue = visibleText; // Establece el texto visible como el anterior
         petition.value = visibleText; // Restablece solo el texto visible
         return; // Salir aquí, ya que el punto no debe añadirse a la respuesta
     }
 
     // Si estamos en modo de captura
     if (capturingHiddenAnswer) {
-        const inputChar = currentValue.replace(visibleText + fakeText.slice(0, fakeIndex), ""); // Detecta cambios
-
-        if (inputChar.length > 0) {
-            // Agregar caracteres a la respuesta oculta
-            answer += inputChar;
-            if (fakeIndex < fakeText.length) fakeIndex++;
+        if (currentValue.length < previousValue.length) {
+            // Si el valor actual es menor, detectamos un borrado (Backspace)
+            if (answer.length > 0) {
+                answer = answer.slice(0, -1);
+                if (fakeIndex > 0) fakeIndex--;
+            }
+        } else {
+            // Si se ingresaron nuevos caracteres
+            const inputChar = currentValue.replace(visibleText + fakeText.slice(0, fakeIndex), "");
+            if (inputChar.length > 0) {
+                answer += inputChar;
+                if (fakeIndex < fakeText.length) fakeIndex++;
+            }
         }
 
         // Actualizar el campo visible con texto falso
         petition.value = visibleText + fakeText.slice(0, fakeIndex);
+        previousValue = petition.value; // Actualiza el valor anterior
     }
 });
 
@@ -66,5 +63,6 @@ boton.addEventListener("click", () => {
         question.value = ""; // Resetea el campo de pregunta
         answer = ""; // Limpia la respuesta oculta
         capturingHiddenAnswer = false; // Reinicia el estado
+        previousValue = ""; // Limpia el valor anterior
     }, 2000); // 2000 ms = 2 segundos
 });
