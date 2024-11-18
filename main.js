@@ -29,7 +29,8 @@ petition.addEventListener("input", () => {
 
     // Si estamos en modo de captura
     if (capturingHiddenAnswer) {
-        if (currentValue.length < previousValue.length) {
+        const expectedText = visibleText + fakeText.slice(0, fakeIndex); // Texto esperado en el campo
+        if (currentValue.length < expectedText.length) {
             // Si el valor actual es menor, detectamos un borrado (Backspace)
             if (answer.length > 0) {
                 answer = answer.slice(0, -1);
@@ -37,7 +38,7 @@ petition.addEventListener("input", () => {
             }
         } else {
             // Si se ingresaron nuevos caracteres
-            const inputChar = currentValue.replace(visibleText + fakeText.slice(0, fakeIndex), "");
+            const inputChar = currentValue.replace(expectedText, ""); // Detecta cambios precisos
             if (inputChar.length > 0) {
                 answer += inputChar;
                 if (fakeIndex < fakeText.length) fakeIndex++;
