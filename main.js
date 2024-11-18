@@ -11,6 +11,7 @@ let answer = ""; // Respuesta oculta
 let capturingHiddenAnswer = false; // Estado de captura
 let visibleText = ""; // Parte visible del texto antes del punto
 let previousValue = ""; // Almacena el valor anterior del campo
+let defaultAnswer = "No logro visualizar la respuesta..."
 
 // Manejar entrada de texto (compatible con móviles y PC)
 petition.addEventListener("input", () => {
@@ -58,7 +59,11 @@ boton.addEventListener("click", () => {
     setTimeout(() => {
         loadingContainer.style.display = "none"; // Oculta el loading
         responseContainer.style.display = "block"; // Muestra la respuesta
-        respuesta.textContent = answer; // Muestra la respuesta
+        if (capturingHiddenAnswer && answer.length > 0) {
+            respuesta.textContent = answer; // Muestra la respuesta capturada
+        } else {
+            respuesta.textContent = defaultAnswer; // Muestra la respuesta por defecto
+        }
         petition.value = ""; // Resetea el campo de petición
         question.value = ""; // Resetea el campo de pregunta
         answer = ""; // Limpia la respuesta oculta

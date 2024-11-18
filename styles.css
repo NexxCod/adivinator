@@ -5,6 +5,17 @@
     box-sizing: border-box;
 }
 
+/* Estilo para el logo */
+.logo {
+    display: block; /* Asegura que se comporte como un bloque */
+    margin: 20px auto; /* Centra la imagen horizontalmente y agrega margen superior/inferior */
+    max-width: 150px; /* Limita el ancho máximo para dispositivos grandes */
+    width: 100%; /* Escala la imagen para pantallas más pequeñas */
+    height: auto; /* Mantiene la proporción de la imagen */
+    border-radius: 50%; /* Opcional: aplica un borde redondeado si es necesario */
+}
+
+
 body {
     font-family: Arial, sans-serif;
     background-color: #f4f4f9;
