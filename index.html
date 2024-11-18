@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adivinator</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Adivinator</h1>
+        <p>Escribe tu petición y luego realiza tu pregunta. ¡La respuesta será revelada!</p>
+        <input type="text" id="input-petition" placeholder="Escribe tu petición a Adivinator">
+        <input type="text" id="input-question" placeholder="Escribe tu pregunta">
+        <button id="start-btn">Responder</button>
+        <div id="response" style="display: none;"> <!-- Oculto inicialmente -->
+            <strong>Respuesta:</strong> <span id="response-text"></span>
+        </div>
+        <div id="loading-container" style="display: none;"> <!-- Animación de carga -->
+            <div class="loading-spinner"></div>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+</html>
